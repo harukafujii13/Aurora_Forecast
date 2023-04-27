@@ -4,7 +4,7 @@ export default {
   "./node_modules/tailwind-datepicker-react/dist/**/*.js"],
   theme: {
     fontFamily: {
-      title: ["Castoro Titling", "cursive"],
+      title: ["'Playfair Display', serif"],
       main: ["Roboto Condensed", "sans - serif"],
     },
     colors: {
@@ -13,6 +13,7 @@ export default {
       moonstone: "#58A4B0",
       powderBlue: "#A9BCD0",
       platinum: "#D8DBE2",
+      violet: "#887caf",
     },
     fontSize: {
       base: "2.5rem",
