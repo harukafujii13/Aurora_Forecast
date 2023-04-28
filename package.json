@@ -14,8 +14,10 @@
     "bulma": "^0.9.4",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.4",
+    "mapbox-gl": "^2.14.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-map-gl": "^7.0.23",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "tailwind-datepicker-react": "^1.2.3"
