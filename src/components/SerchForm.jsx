@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+// import "./SerchForm.module.css";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q";
@@ -18,7 +19,7 @@ const SerchForm = () => {
       types: "country,region,place,postcode,locality,neighborhood",
     });
 
-    geocoder.addTo(geocoderContainer.current);
+    geocoder.addTo("#geocoder");
 
     // Get the geocoder results container.
     const results = document.getElementById("result");
@@ -32,6 +33,8 @@ const SerchForm = () => {
     geocoder.on("clear", () => {
       results.innerText = "";
     });
+
+    return () => (geocoderContainer.current.innerHTML = "");
   }, []);
 
   return (
@@ -40,15 +43,14 @@ const SerchForm = () => {
         <form
           className="space-y-4"
           onClick={serchHandler}>
-          <div
-            className="flex flex-col"
-            id="geocoder">
+          <div className="flex flex-col">
             <label
               htmlFor="region"
               className="mb-1 text-gray-800 font-main font-semibold">
               Your Place
             </label>
-            <input
+            <div
+              id="geocoder"
               ref={geocoderContainer}
               className="border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
