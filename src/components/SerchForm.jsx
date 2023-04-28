@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 // import "./SerchForm.module.css";
@@ -7,8 +7,12 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q";
 
 const SerchForm = () => {
+  const [selectedLocation, setSelectedLocation] = useState({});
+
   const serchHandler = (event) => {
     event.preventDefault();
+    console.log("Longitude:", selectedLocation[0]);
+    console.log("Latitude:", selectedLocation[1]);
   };
 
   const geocoderContainer = useRef(null);
@@ -24,16 +28,17 @@ const SerchForm = () => {
     // Get the geocoder results container.
     const results = document.getElementById("result");
 
-    geocoder.on("result", (e) => {
-      const { coordinates } = e.result.geometry;
-      const longitude = coordinates[0];
-      const latitude = coordinates[1];
-      console.log("Longitude:", longitude);
-      console.log("Latitude:", latitude);
-    });
+    // geocoder.on("result", (e) => {
+    //   const { coordinates } = e.result.geometry;
+    //   const longitude = coordinates[0]; //経度
+    //   const latitude = coordinates[1]; //緯度
+    //   console.log("Longitude:", longitude);
+    //   console.log("Latitude:", latitude);
+    // });
 
     // Add geocoder result to container.
     geocoder.on("result", (e) => {
+      setSelectedLocation(e.result.geometry.coordinates);
       results.innerText = JSON.stringify(e.result, null, 2);
     });
 
