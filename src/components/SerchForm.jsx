@@ -24,6 +24,14 @@ const SerchForm = () => {
     // Get the geocoder results container.
     const results = document.getElementById("result");
 
+    geocoder.on("result", (e) => {
+      const { coordinates } = e.result.geometry;
+      const longitude = coordinates[0];
+      const latitude = coordinates[1];
+      console.log("Longitude:", longitude);
+      console.log("Latitude:", latitude);
+    });
+
     // Add geocoder result to container.
     geocoder.on("result", (e) => {
       results.innerText = JSON.stringify(e.result, null, 2);
@@ -54,23 +62,8 @@ const SerchForm = () => {
               ref={geocoderContainer}
               className="border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            {/* <div id="result" /> */}
+            <div id="result" />
           </div>
-
-          {/* <div className="flex flex-col">
-            <label
-              htmlFor="date"
-              className="mb-1 text-gray-800 font-main font-semibold">
-              Date
-            </label>
-            <input
-              type="date"
-              id="date"
-              value={date}
-              onChange={dateChange}
-              className="border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-          </div> */}
 
           <button className="w-full bg-charcoale text-moonstone rounded-lg py-2 hover:bg-violet transition duration-200 font-main font-semibold">
             Search
