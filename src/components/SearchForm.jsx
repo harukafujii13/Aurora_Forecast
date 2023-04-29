@@ -6,7 +6,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 mapboxgl.accessToken =
   "pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q";
 
-const SerchForm = () => {
+const SearchForm = () => {
   const [selectedLocation, setSelectedLocation] = useState({});
 
   const serchHandler = (event) => {
@@ -79,4 +79,4 @@ const SerchForm = () => {
   );
 };
 
-export default SerchForm;
+export default SearchForm;
