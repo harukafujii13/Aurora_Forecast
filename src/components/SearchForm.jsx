@@ -51,7 +51,7 @@ const SearchForm = () => {
   }, []);
 
   return (
-    <main className="text-charcoale mx-96 my-60 p-6 bg-powderBlue bg-opacity-60 rounded-lg shadow-lg">
+    <main className="mx-auto my-40 p-6 bg-powderBlue bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
       <section>
         <form
           className="space-y-4"
