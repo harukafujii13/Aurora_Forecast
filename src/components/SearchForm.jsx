@@ -1,20 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-// import "./SerchForm.module.css";
+import { setLocation } from "../store/slice/locationSlice";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q";
 
 const SearchForm = () => {
-  const [selectedLocation, setSelectedLocation] = useState({});
-
-  const serchHandler = (event) => {
-    event.preventDefault();
-    console.log("Longitude:", selectedLocation[0]);
-    console.log("Latitude:", selectedLocation[1]);
-  };
-
+  const dispatch = useDispatch();
   const geocoderContainer = useRef(null);
 
   useEffect(() => {
@@ -25,30 +19,19 @@ const SearchForm = () => {
 
     geocoder.addTo("#geocoder");
 
-    // Get the geocoder results container.
-    const results = document.getElementById("result");
-
-    // geocoder.on("result", (e) => {
-    //   const { coordinates } = e.result.geometry;
-    //   const longitude = coordinates[0]; //経度
-    //   const latitude = coordinates[1]; //緯度
-    //   console.log("Longitude:", longitude);
-    //   console.log("Latitude:", latitude);
-    // });
-
-    // Add geocoder result to container.
     geocoder.on("result", (e) => {
-      setSelectedLocation(e.result.geometry.coordinates);
-      results.innerText = JSON.stringify(e.result, null, 2);
-    });
-
-    // Clear results container when search is cleared.
-    geocoder.on("clear", () => {
-      results.innerText = "";
+      const { coordinates } = e.result.geometry;
+      dispatch(setLocation(coordinates));
     });
 
     return () => (geocoderContainer.current.innerHTML = "");
-  }, []);
+  }, [dispatch]);
+
+  const serchHandler = (event) => {
+    event.preventDefault();
+    console.log("Longitude:", selectedLocation[0]);
+    console.log("Latitude:", selectedLocation[1]);
+  };
 
   return (
     <main className="mx-auto my-40 p-6 bg-powderBlue bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
