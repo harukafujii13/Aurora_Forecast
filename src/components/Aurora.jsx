@@ -1,9 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-export default function App() {
+const Aurora = () => {
   const [data, setData] = useState();
-  const coords = { long: 265.32456, lat: 58.0 };
+  const longitude = useSelector((state) => state?.longitude || "0");
+  const latitude = useSelector((state) => state?.latitude || "0");
+
+  const coords = { long: longitude, lat: latitude };
   const URL = "https://services.swpc.noaa.gov/json/ovation_aurora_latest.json";
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(URL);
@@ -12,13 +17,24 @@ export default function App() {
     };
 
     fetchData();
-  });
+  }, []);
 
-  const findKp = (coords) => {
-    const numberCoords = {
-      long: Number(coords.long.toFixed(0)),
-      lat: Number(coords.lat.toFixed(0)),
-    };
+  const findKp = ({ long, lat }) => {
+    console.log(long, lat);
+    let numberCoords;
+    if (Number(long) < 0) {
+      numberCoords = {
+        long: Math.abs(Number(long).toFixed(0)) + 180,
+        lat: Math.round(Number(latitude)),
+      };
+    } else {
+      numberCoords = {
+        long: Math.round(Number(longitude)),
+        lat: Math.round(Number(latitude)),
+      };
+    }
+
+    console.log(numberCoords);
 
     const found = data.coordinates.find((c) => {
       if (c[0] === numberCoords.long && c[1] === numberCoords.lat) {
@@ -32,8 +48,13 @@ export default function App() {
   };
 
   return (
-    <div>
-      <button onClick={() => findKp(coords)}>find</button>
+    <div className="h-6 bg-charcoale">
+      <button
+        className="btn"
+        onClick={() => findKp(coords)}>
+        find
+      </button>
     </div>
   );
-}
+};
+export default Aurora;

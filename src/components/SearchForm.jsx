@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import { setLocation } from "../store/slice/locationSlice";
@@ -10,8 +10,10 @@ mapboxgl.accessToken =
 const SearchForm = () => {
   const dispatch = useDispatch();
   const geocoderContainer = useRef(null);
+  const long = useSelector((state) => state.longitude);
 
   useEffect(() => {
+    console.log(long);
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       types: "country,region,place,postcode,locality,neighborhood",
@@ -22,6 +24,7 @@ const SearchForm = () => {
     geocoder.on("result", (e) => {
       const { coordinates } = e.result.geometry;
       dispatch(setLocation(coordinates));
+      console.log(coordinates);
     });
 
     return () => (geocoderContainer.current.innerHTML = "");
@@ -29,8 +32,14 @@ const SearchForm = () => {
 
   const serchHandler = (event) => {
     event.preventDefault();
-    console.log("Longitude:", selectedLocation[0]);
-    console.log("Latitude:", selectedLocation[1]);
+    // dispatch(
+    //   setLocation({
+    //     longitude,
+    //     latitude,
+    //   })
+    // );
+    // console.log("Longitude:", selectedLocation[0]);
+    // console.log("Latitude:", selectedLocation[1]);
   };
 
   return (
