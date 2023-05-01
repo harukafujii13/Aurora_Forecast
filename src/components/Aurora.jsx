@@ -58,3 +58,38 @@ const Aurora = () => {
   );
 };
 export default Aurora;
+
+// const kpIndex = ({ kp }) => {
+//   let possibility;
+
+//   switch (kp) {
+//     case 0:
+//       possibility = "0%";
+//       break;
+//     case 1:
+//     case 2:
+//     case 3:
+//       possibility = "30%";
+//       break;
+//     case 4:
+//     case 5:
+//       possibility = "50%";
+//       break;
+//     case 6:
+//     case 7:
+//       possibility = "70%";
+//       break;
+//     case 8:
+//       possibility = "80%";
+//       break;
+//     default:
+//       possibility = "90%";
+//       break;
+//   }
+// }
+
+// return(
+//   <div>
+//     <p>Possibility: {possibility}</p>
+//   </div>
+// )

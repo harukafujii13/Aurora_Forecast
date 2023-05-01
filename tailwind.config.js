@@ -17,6 +17,8 @@ export default {
     },
     fontSize: {
       base: "2.5rem",
+      psb: "5rem",
+      main: "2rem"
     },
     extend: {},
   },

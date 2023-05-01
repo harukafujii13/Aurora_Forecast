@@ -3,17 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import mapboxgl from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import { setLocation } from "../store/slice/locationSlice";
+import { useState } from "react";
+
+import Aurora from "./Aurora";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q";
 
 const SearchForm = () => {
+  const [showAurora, setShowAurora] = useState(false);
+
   const dispatch = useDispatch();
   const geocoderContainer = useRef(null);
-  const long = useSelector((state) => state.longitude);
+  const location = useSelector((state) => state.location);
 
   useEffect(() => {
-    console.log(long);
+    console.log(geocoderContainer.current.innerHTML);
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       types: "country,region,place,postcode,locality,neighborhood",
@@ -27,11 +32,21 @@ const SearchForm = () => {
       console.log(coordinates);
     });
 
-    return () => (geocoderContainer.current.innerHTML = "");
+    return () => {
+      dispatch(
+        setLocation({
+          longitude: 0,
+          latitude: 0,
+        })
+      );
+      geocoderContainer.current.innerHTML = "";
+    };
   }, [dispatch]);
 
   const serchHandler = (event) => {
     event.preventDefault();
+    setShowAurora(!showAurora);
+
     // dispatch(
     //   setLocation({
     //     longitude,
@@ -42,32 +57,45 @@ const SearchForm = () => {
     // console.log("Latitude:", selectedLocation[1]);
   };
 
-  return (
-    <main className="mx-auto my-40 p-6 bg-powderBlue bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
-      <section>
-        <form
-          className="space-y-4"
-          onClick={serchHandler}>
-          <div className="flex flex-col">
-            <label
-              htmlFor="region"
-              className="mb-1 text-gray-800 font-main font-semibold">
-              Your Place
-            </label>
-            <div
-              id="geocoder"
-              ref={geocoderContainer}
-              className="border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <div id="result" />
-          </div>
+  const focusHandler = () => {
+    dispatch(
+      setLocation({
+        longitude: null,
+        latitude: null,
+      })
+    );
+    console.log(location);
+  };
 
-          <button className="w-full bg-charcoale text-moonstone rounded-lg py-2 hover:bg-violet transition duration-200 font-main font-semibold">
-            Search
-          </button>
-        </form>
-      </section>
-    </main>
+  return (
+    <>
+      <main className="mx-auto mt-40 mb-14 p-6 bg-gradient-to-r from-purple-400 to-green-400 bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
+        <section>
+          <form className="space-y-4">
+            <div className="flex flex-col">
+              <label
+                htmlFor="region"
+                className="mb-2 text-black font-main font-semibold">
+                Your Place
+              </label>
+              <div
+                onChange={focusHandler}
+                id="geocoder"
+                ref={geocoderContainer}
+                className="border border-gray-400 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 font-main"
+              />
+              <div id="result" />
+            </div>
+            {/* <button
+              onClick={serchHandler}
+              className="w-full bg-charcoale text-moonstone rounded-lg py-2
+              hover:bg-violet transition duration-200 font-main font-semibold">
+              Search
+            </button> */}
+          </form>
+        </section>
+      </main>
+    </>
   );
 };
 
