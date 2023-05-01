@@ -76,7 +76,7 @@ const SearchForm = () => {
               <label
                 htmlFor="region"
                 className="mb-2 text-black font-main font-semibold">
-                Your Place
+                YOUR PLACE
               </label>
               <div
                 onChange={focusHandler}
