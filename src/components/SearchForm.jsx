@@ -67,7 +67,7 @@ const SearchForm = () => {
 
   return (
     <>
-      <main className="mx-auto mt-32 mb-0 p-6 bg-gradient-to-r from-purple-400 to-green-400 bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
+      <main className="mx-auto mt-20 mb-0 p-6 bg-gradient-to-r from-purple-400 to-green-400 bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
         <section>
           <form className="space-y-4">
             <div className="flex flex-col">
