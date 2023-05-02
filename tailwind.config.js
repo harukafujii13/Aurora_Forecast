@@ -14,6 +14,8 @@ export default {
       powderBlue: "#A9BCD0",
       platinum: "#D8DBE2",
       violet: "#887caf",
+      murrey: "#ED7EBA",
+      pop: "#E39D27",
     },
     fontSize: {
       base: "2.5rem",

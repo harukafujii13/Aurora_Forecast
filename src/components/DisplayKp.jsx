@@ -87,12 +87,18 @@ const DisplayKp = () => {
   return (
     { setShowDisplay } && (
       <div className="mx-auto my-8 p-6 md:w-1/2 lg:w-1/3 text-center">
-        <p className="text-gray-100 font-bold text-main mb-2 font-main">
+        <p className="text-white font-bold text-main mb-2 font-main">
           POSSIBILITY
         </p>
-        <p className="ext-7xl text-white font-bold font-main text-psb ">
+        <p className="ext-7xl text-murrey font-bold font-main text-psb ">
           {showdDisplay}
         </p>
+
+        <div className="w-full bg-white rounded-full h-7 dark:bg-gray-600 mt-7">
+          <div
+            className="bg-gradient-to-r from-yellow-300 to-pink-400 h-7 rounded-full"
+            style={{ width: showdDisplay }}></div>
+        </div>
       </div>
     )
   );

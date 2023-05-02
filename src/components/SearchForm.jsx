@@ -5,8 +5,6 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import { setLocation } from "../store/slice/locationSlice";
 import { useState } from "react";
 
-import Aurora from "./Aurora";
-
 mapboxgl.accessToken =
   "pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q";
 
@@ -69,7 +67,7 @@ const SearchForm = () => {
 
   return (
     <>
-      <main className="mx-auto mt-40 mb-14 p-6 bg-gradient-to-r from-purple-400 to-green-400 bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
+      <main className="mx-auto mt-32 mb-0 p-6 bg-gradient-to-r from-purple-400 to-green-400 bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
         <section>
           <form className="space-y-4">
             <div className="flex flex-col">
@@ -86,12 +84,6 @@ const SearchForm = () => {
               />
               <div id="result" />
             </div>
-            {/* <button
-              onClick={serchHandler}
-              className="w-full bg-charcoale text-moonstone rounded-lg py-2
-              hover:bg-violet transition duration-200 font-main font-semibold">
-              Search
-            </button> */}
           </form>
         </section>
       </main>
