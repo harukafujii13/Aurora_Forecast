@@ -1,15 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import Header from "./components/Header";
-import SearchForm from "./components/SearchForm";
-import DisplayKp from "./components/DisplayKp";
+import Header from './components/Header';
+import SearchForm from './components/SearchForm';
+import DisplayKp from './components/DisplayKp';
 
 function App() {
   return (
-    <div className="bg-[url('./assets/main-background.jpg')] bg-cover min-h-screen">
-      <Header />
-      <SearchForm />
-      <DisplayKp />
+    <div className="min-h-screen relative">
+      <div className="bg-[url('./assets/main-background.jpg')] bg-cover min-h-screen absolute w-full h-full blur-sm"></div>
+      <div className="bg-text relative">
+        <Header />
+        <SearchForm />
+        <DisplayKp />
+      </div>
     </div>
   );
 }
