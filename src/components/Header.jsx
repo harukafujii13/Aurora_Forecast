@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const Header = () => {
   return (
-    <header className="flex items-center w-full h-15 md:h-20">
-      <h1 className="font-main text-base text-white font-bold m-6 tracking-wide">
-        Today's Aurora Forecast
-      </h1>
+    <header className="flex items-center w-full h-[5rem] md:h-20">
+      <div className="font-main lg:text-5xl md:text-4xl text-3xl text-white font-semibold m-7 tracking-wide">
+        Aurora Forecast
+      </div>
     </header>
   );
 };
