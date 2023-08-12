@@ -1,16 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import mapboxgl from "mapbox-gl";
-import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-import { setLocation } from "../store/slice/locationSlice";
-import { useState } from "react";
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { setLocation } from '../store/slice/locationSlice';
+import { useState } from 'react';
 
 mapboxgl.accessToken =
-  "pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q";
+  'pk.eyJ1IjoiazUyNDEyMzEiLCJhIjoiY2xneXNuOTNmMGE3bTNzbm1jdWNqaGh1YyJ9.GDOMiPvIjJMUZJNZwdCJ6Q';
 
 const SearchForm = () => {
   const [showAurora, setShowAurora] = useState(false);
-
   const dispatch = useDispatch();
   const geocoderContainer = useRef(null);
   const location = useSelector((state) => state.location);
@@ -19,12 +18,13 @@ const SearchForm = () => {
     console.log(geocoderContainer.current.innerHTML);
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
-      types: "country,region,place,postcode,locality,neighborhood",
+      types: 'country,region,place,postcode,locality,neighborhood',
+      language: 'en',
     });
 
-    geocoder.addTo("#geocoder");
+    geocoder.addTo('#geocoder');
 
-    geocoder.on("result", (e) => {
+    geocoder.on('result', (e) => {
       const { coordinates } = e.result.geometry;
       dispatch(setLocation(coordinates));
       console.log(coordinates);
@@ -37,7 +37,7 @@ const SearchForm = () => {
           latitude: 0,
         })
       );
-      geocoderContainer.current.innerHTML = "";
+      geocoderContainer.current.innerHTML = '';
     };
   }, [dispatch]);
 
@@ -67,13 +67,13 @@ const SearchForm = () => {
 
   return (
     <>
-      <main className="mx-auto mt-20 mb-0 p-6 bg-gradient-to-r from-purple-400 to-green-400 bg-opacity-60 rounded-lg shadow-lg md:w-1/2 lg:w-1/3">
+      <main className="mx-auto mt-20 mb-0 p-6  bg-purple-400  rounded-lg shadow-lg md:w-[30rem] lg:w-[30rem] w-[20rem]">
         <section>
           <form className="space-y-4">
             <div className="flex flex-col">
               <label
                 htmlFor="region"
-                className="mb-2 text-black font-main font-semibold">
+                className="mb-2 text-white font-main font-semibold">
                 YOUR PLACE
               </label>
               <div
