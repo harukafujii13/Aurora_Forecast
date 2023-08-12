@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const Aurora = () => {
   const [data, setData] = useState();
-  const longitude = useSelector((state) => state?.longitude || "0");
-  const latitude = useSelector((state) => state?.latitude || "0");
+  const longitude = useSelector((state) => state?.longitude || '0');
+  const latitude = useSelector((state) => state?.latitude || '0');
 
   const coords = { long: longitude, lat: latitude };
-  const URL = "https://services.swpc.noaa.gov/json/ovation_aurora_latest.json";
+  const URL = 'https://services.swpc.noaa.gov/json/ovation_aurora_latest.json';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +34,7 @@ const Aurora = () => {
       };
     }
 
-    console.log(numberCoords);
+    // console.log(numberCoords);
 
     const found = data.coordinates.find((c) => {
       if (c[0] === numberCoords.long && c[1] === numberCoords.lat) {
@@ -43,8 +43,8 @@ const Aurora = () => {
       return false;
     });
 
-    if (found) console.log("KP: ", found[2]);
-    else console.log("not found");
+    if (found) console.log('KP: ', found[2]);
+    else console.log('not found');
   };
 
   return (
@@ -57,39 +57,5 @@ const Aurora = () => {
     </div>
   );
 };
+
 export default Aurora;
-
-// const kpIndex = ({ kp }) => {
-//   let possibility;
-
-//   switch (kp) {
-//     case 0:
-//       possibility = "0%";
-//       break;
-//     case 1:
-//     case 2:
-//     case 3:
-//       possibility = "30%";
-//       break;
-//     case 4:
-//     case 5:
-//       possibility = "50%";
-//       break;
-//     case 6:
-//     case 7:
-//       possibility = "70%";
-//       break;
-//     case 8:
-//       possibility = "80%";
-//       break;
-//     default:
-//       possibility = "90%";
-//       break;
-//   }
-// }
-
-// return(
-//   <div>
-//     <p>Possibility: {possibility}</p>
-//   </div>
-// )
